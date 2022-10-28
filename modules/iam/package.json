@@ -1,0 +1,14 @@
+{
+  "name": "iam",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "scripts": {
+    "applyIam": "cd ./src/main/resources/stacks/iam && terraform apply",
+    "destroyIam": "cd ./src/main/resources/stacks/iam && terraform destroy",
+    "planIam": "cd ./src/main/resources/stacks/iam && terraform init && terraform plan"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "private": true
+}

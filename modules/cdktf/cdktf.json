@@ -1,0 +1,15 @@
+{
+  "language": "java",
+  "app": "sbt cdktf/run",
+  "projectId": "85dcf7c0-1710-4147-b236-8643847ab5e6",
+  "sendCrashReports": "true",
+  "codeMakerOutput": "src/main/java/imports",
+  "terraformProviders": [
+    "aws@~> 4.37.0",
+    "hashicorp/archive@~> 2.2.0"
+  ],  "terraformModules": [],
+  "context": {
+    "excludeStackIdFromLogicalIds": "true",
+    "allowSepCharsInLogicalIds": "true"
+  }
+}

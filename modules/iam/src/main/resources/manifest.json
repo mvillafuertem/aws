@@ -1,0 +1,13 @@
+{
+  "version": "0.13.2",
+  "stacks": {
+    "iam": {
+      "name": "iam",
+      "constructPath": "iam",
+      "workingDirectory": "stacks/iam",
+      "synthesizedStackPath": "stacks/iam/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    }
+  }
+}
