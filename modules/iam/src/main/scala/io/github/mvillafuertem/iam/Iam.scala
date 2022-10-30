@@ -1,26 +1,41 @@
 package io.github.mvillafuertem.iam
 
-import software.constructs.Construct
 import com.hashicorp.cdktf.{ AppOptions, TerraformStack }
-import imports.aws.provider.AwsProvider
+import imports.aws.provider.{ AwsProvider, AwsProviderEndpoints }
+import software.constructs.Construct
 
 import scala.jdk.CollectionConverters._
 
 final class Iam(scope: Construct, id: String) extends TerraformStack(scope, id) {
   self: Construct =>
 
-  private val accountId             = "582268654997"
-  private val region                = "eu-west-3"
-  private val sharedCredentialsFile = "~/.aws/credentials"
-  private val profile               = "myprofile"
+  private val accountId = "000000000000"
+  private val region    = "eu-west-3"
+  private val accessKey = "accessKeyId"
+  private val secretKey = "secretAccessKey"
 
   private val _: AwsProvider = AwsProvider.Builder
-    .create(self, "cdktf_aws_provider")
+    .create(self, s"${id}_aws_provider")
     .allowedAccountIds(List(accountId).asJava)
     .region(region)
-    .sharedCredentialsFile(sharedCredentialsFile)
-    .profile(profile)
+    .accessKey(accessKey)
+    .secretKey(secretKey)
+    .endpoints(
+      Seq(
+        AwsProviderEndpoints
+          .builder()
+          .iam("http://localhost:4566")
+          .build()
+      ).asJava
+    )
+    .skipCredentialsValidation(true)
+    .skipMetadataApiCheck("true")
+    // .skipRequestingAccountId(true)
     .build()
+
+  private val users: Users   = Users(self, s"${id}_users")
+  private val groups: Groups = Groups(self, s"${id}_groups")
+  private val _: Policies    = Policies(self, s"${id}_policies")(users, groups)
 
 }
 
@@ -44,7 +59,12 @@ object Iam extends App {
       .build()
   )
 
-  new Iam(app, "iam")
+  private val packageName: String = getClass.getPackage.getName
+    .split("\\.")
+    .drop(2)
+    .mkString("_")
+
+  new Iam(app, packageName)
   app.synth()
 
 }

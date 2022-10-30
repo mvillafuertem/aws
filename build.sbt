@@ -39,7 +39,10 @@ lazy val cdktf = (project in file("modules/cdktf"))
   .settings(watchTriggers += baseDirectory.value.toGlob / "*.scala")
 
 lazy val iam = (project in file("modules/iam"))
+  .configs(IntegrationTest)
+  .settings(Defaults.itSettings)
   .settings(scalaVersion := scala213)
+  .settings(libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.10" % IntegrationTest)
   .dependsOn(cdktf)
 
 def welcomeMessage: Def.Setting[String] = onLoadMessage := {

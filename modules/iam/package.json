@@ -4,9 +4,9 @@
   "description": "",
   "license": "MIT",
   "scripts": {
-    "applyIam": "cd ./src/main/resources/stacks/iam && terraform apply",
-    "destroyIam": "cd ./src/main/resources/stacks/iam && terraform destroy",
-    "planIam": "cd ./src/main/resources/stacks/iam && terraform init && terraform plan"
+    "applyIam": "cd ./src/main/resources/stacks/mvillafuertem_iam && terraform apply",
+    "destroyIam": "cd ./src/main/resources/stacks/mvillafuertem_iam && terraform destroy",
+    "planIam": "cd ./src/main/resources/stacks/mvillafuertem_iam && terraform init && terraform plan"
   },
   "dependencies": {},
   "devDependencies": {},

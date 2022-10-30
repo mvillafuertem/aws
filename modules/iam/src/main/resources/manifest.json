@@ -1,11 +1,11 @@
 {
   "version": "0.13.2",
   "stacks": {
-    "iam": {
-      "name": "iam",
-      "constructPath": "iam",
-      "workingDirectory": "stacks/iam",
-      "synthesizedStackPath": "stacks/iam/cdk.tf.json",
+    "mvillafuertem_iam": {
+      "name": "mvillafuertem_iam",
+      "constructPath": "mvillafuertem_iam",
+      "workingDirectory": "stacks/mvillafuertem_iam",
+      "synthesizedStackPath": "stacks/mvillafuertem_iam/cdk.tf.json",
       "annotations": [],
       "dependencies": []
     }
