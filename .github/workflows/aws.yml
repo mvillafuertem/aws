@@ -1,4 +1,4 @@
-name: sparkci
+name: aws
 
 on: [ push, pull_request ]
 
