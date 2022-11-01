@@ -1,0 +1,62 @@
+@startuml AWS Technical Essentials – Lab 1: Introduction to AWS Identity and Access Management
+'https://crashedmind.github.io/PlantUMLHitchhikersGuide/aws/aws.html#create-real-life-aws-diagrams
+!pragma layout smetana
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v14.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/Groups/all.puml
+!include AWSPuml/AWSSimplified.puml
+!include AWSPuml/General/all.puml
+!include AWSPuml/GroupIcons/all.puml
+!include AWSPuml/SecurityIdentityCompliance/all.puml
+!include AWSPuml/Storage/all.puml
+!include AWSPuml/Compute/all.puml
+
+'scale max 1024 width
+'skinparam Linetype polyline
+'skinparam BackgroundColor transparent
+!define COLOR_BLUE #4E70BE
+!define READ_ONLY Read Only
+!define VIEW_START_STOP View, Start, Stop
+
+skinparam rectangle<<GenericRedGroup>> {
+  Shadowing true
+}
+
+
+
+AWSCloudGroup(awscloud, "\n") {
+
+    GenericRedGroup(ec2AdminGroup, "EC2 Admin") {
+            User(user3, "user-3",)
+            IdentityAccessManagementPermissions(viewStartStop, VIEW_START_STOP,)
+            EC2(ec22, "EC2",)
+
+    }
+    GenericRedGroup(ec2SupportGroup, "EC2 Support") {
+            User(user2, "user-2",)
+            IdentityAccessManagementPermissions(readOnly2, READ_ONLY,)
+            EC2(ec21, "EC2",)
+
+    }
+    GenericRedGroup(s3SupportGroup, "S3 Support") {
+            User(user1, "user-1",)
+            IdentityAccessManagementPermissions(readOnly1, READ_ONLY,)
+            SimpleStorageService(s3, "S3",)
+    }
+
+}
+
+user1 -[COLOR_BLUE]r-> readOnly1 : "                  "
+readOnly1 -[COLOR_BLUE]r->  s3 : "                  "
+
+s3 --[hidden]d-> ec21
+
+user2 -[COLOR_BLUE]r->  readOnly2 : "                  "
+readOnly2 -[COLOR_BLUE]r->  ec21 : "                  "
+
+ec21 --[hidden]d-> ec22
+
+user3 -[COLOR_BLUE]r-> viewStartStop : "            "
+viewStartStop -[COLOR_BLUE]r-> ec22 : "            "
+
+@enduml

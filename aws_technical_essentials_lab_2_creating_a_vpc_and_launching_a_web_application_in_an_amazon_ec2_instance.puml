@@ -1,0 +1,63 @@
+@startuml AWS Technical Essentials – Lab 2: Creating a VPC and Launching a Web Application in an Amazon EC2 Instance
+'Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+'SPDX-License-Identifier: MIT (For details, see https://github.com/awslabs/aws-icons-for-plantuml/blob/master/LICENSE)
+
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v14.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/AWSSimplified.puml
+!include AWSPuml/Compute/EC2.puml
+!include AWSPuml/Compute/EC2Instance.puml
+!include AWSPuml/Groups/AWSCloud.puml
+!include AWSPuml/Groups/VPC.puml
+!include AWSPuml/General/Internet.puml
+!include AWSPuml/Groups/AvailabilityZone.puml
+!include AWSPuml/Groups/PublicSubnet.puml
+!include AWSPuml/Groups/PrivateSubnet.puml
+!include AWSPuml/NetworkingContentDelivery/VPCNATGateway.puml
+!include AWSPuml/NetworkingContentDelivery/VPCInternetGateway.puml
+!include AWSPuml/NetworkingContentDelivery/Route53RouteTable.puml
+
+!define COLOR_BLUE #4E70BE
+skinparam linetype ortho
+
+' create a "filler" rectangle to give empty groups some volume
+skinparam rectangle<<filler>> {
+  BackgroundColor #Transparent
+  BorderThickness 0
+}
+
+!$fillerindex = 0
+!function $filler($newline="")
+!$fillerindex = $fillerindex + 1
+!return "rectangle " + %chr(34) + " " + $newline + %chr(34) + " as spacer" + $fillerindex + " <<filler>>"
+!endfunction
+
+
+AWSCloudGroup(cloud) {
+  Internet(internet, "Internet",)
+  VPCGroup(vpc, "lab-2-vpc") {
+    VPCInternetGateway(internet_gateway, "lab-2-igw", "")
+    Route53RouteTable(route_table, "lab-2-rtb-public   ",)
+    AvailabilityZoneGroup(az_1, "Availability Zone A") {
+      PublicSubnetGroup(az_1_public, "lab-2-public-subnet-1-[az-a]") {
+          $filler("\n\n\n\n\n")
+      }
+    }
+
+    AvailabilityZoneGroup(az_2, "Availability Zone B") {
+      PublicSubnetGroup(az_2_public, "lab-2-public-subnet-2-[az-b]") {
+         $filler("\n\n\n\n\n")
+      }
+    }
+
+    internet_gateway <-[COLOR_BLUE]u--> internet
+    route_table <-[COLOR_BLUE]u-> internet_gateway
+
+    spacer2 <-[hidden]u-> route_table
+    spacer1 <-[hidden]u-> route_table
+
+    az_1_public <-[COLOR_BLUE]u--> route_table
+    az_2_public <-[COLOR_BLUE]u--> route_table
+  }
+}
+@enduml
