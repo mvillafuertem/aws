@@ -24,5 +24,7 @@ jobs:
           architecture: x64 # (x64 or x86) - defaults to x64
       - name: Run aws
         run: |
+          yarn --cwd modules/cdktf/ install && \
+          yarn --cwd modules/cdktf/ fetch && \
           sbt "iam/runMain io.github.mvillafuertem.iam.Iam" && \
           sbt "iam/it:test"
