@@ -1,7 +1,7 @@
 package io.github.mvillafuertem.iam
 
-import imports.aws.iam_group_membership.IamGroupMembership
-import imports.aws.iam_group_policy_attachment.IamGroupPolicyAttachment
+import io.github.mvillafuertem.aws.iam_group_membership.IamGroupMembership
+import io.github.mvillafuertem.aws.iam_group_policy_attachment.IamGroupPolicyAttachment
 import software.constructs.Construct
 
 import scala.jdk.CollectionConverters._

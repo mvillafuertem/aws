@@ -1,0 +1,78 @@
+@startuml
+
+hide stereotype
+
+skinparam DefaultTextAlignment right
+skinparam linetype ortho
+skinparam PackageTitleAlignment left
+
+
+
+' wraps each line (seperated by \n) of a multi-line label with color
+!function $colorlabel($label, $color="black")
+!$buffer = ""
+!$tmp = $label
+!$i = %strpos($tmp, "\n")
+!while $i >= 0
+  !$buffer = $buffer + %substr($tmp, 0, $i) + "</color>\n<color:" + $color + ">"
+  !$tmp = %substr($tmp, $i + 2)
+  !$i = %strpos($tmp, "\n")
+!endwhile
+!return "<color:" + $color + ">" + $buffer + $tmp + "</color>"
+!endfunction
+
+' "StereotypeFontSize 0" below will hide text
+' still need "hide stereotype" in diagrams to hide whitespace
+!definelong AWSGroupColoring(g_stereo, g_background_color, g_border_color, g_border_style)
+skinparam rectangle<<g_stereo>> {
+    StereotypeFontSize 10
+    BackgroundColor g_background_color
+    BorderColor g_border_color
+    BorderStyle g_border_style
+    Shadowing false
+    RoundCorner 10
+}
+!enddefinelong
+
+!function $AWSGroupImg($service)
+!return %call_user_func("$" + $service + "IMG", ".5")
+!endfunction
+
+!definelong AWSGroupEntity(g_alias, g_label, g_color, g_sprite, g_stereo)
+rectangle "$AWSGroupImg(g_sprite)  $colorlabel(g_label, g_color)" as g_alias <<g_stereo>>
+!enddefinelong
+
+
+!function $AWSCloudIMG($scale=1)
+!return "<img data:image/png;base64,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{scale="+$scale+"}>"
+!endfunction
+
+AWSGroupColoring(AWSCloudGroup, #FFFFFF, #000000, plain)
+
+!define AWSCloudGroup(g_alias, g_label="AWS Cloud") AWSGroupEntity(g_alias, g_label, #000000, AWSCloud, AWSCloudGroup)
+
+
+AWSCloudGroup(hola, "") {
+
+    AWSCloudGroup(adios)
+    rectangle awscloud <<awscloud>> as "$AWSCloudIMG()" {
+
+        interface a
+        interface b
+        interface c
+        interface d
+        interface e
+        interface f
+
+    }
+
+    interface g
+    interface h
+    interface i
+    interface j
+
+    b <-u-> adios
+}
+
+
+@enduml

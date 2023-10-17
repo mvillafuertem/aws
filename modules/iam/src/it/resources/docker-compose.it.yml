@@ -3,13 +3,13 @@ version: '3.8'
 services:
 
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:0.14.2
     hostname: localstack
     ports:
       - "4566:4566"
     environment:
       # Declare which aws services will be used in localstack
-      - SERVICES=iam
+      - SERVICES=iam,sqs,sns,s3
       - DEBUG=1
       # These variables are needed for localstack
       - AWS_DEFAULT_REGION=us-east-1

@@ -1,6 +1,6 @@
 package io.github.mvillafuertem.iam
 
-import imports.aws.iam_user.IamUser
+import io.github.mvillafuertem.aws.iam_user.IamUser
 import software.constructs.Construct
 
 final case class Users(scope: Construct, id: String) extends Construct(scope, id) {

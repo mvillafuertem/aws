@@ -1,7 +1,7 @@
 package io.github.mvillafuertem.iam
 
-import com.hashicorp.cdktf.{ AppOptions, TerraformStack }
-import imports.aws.provider.{ AwsProvider, AwsProviderEndpoints }
+import com.hashicorp.cdktf.{ AppConfig, TerraformStack }
+import io.github.mvillafuertem.aws.provider.{ AwsProvider, AwsProviderEndpoints }
 import software.constructs.Construct
 
 import scala.jdk.CollectionConverters._
@@ -46,7 +46,7 @@ final class Iam(scope: Construct, id: String) extends TerraformStack(scope, id) 
 object Iam extends App {
 
   private val app: com.hashicorp.cdktf.App = new com.hashicorp.cdktf.App(
-    AppOptions
+    AppConfig
       .builder()
       .stackTraces(false)
       .outdir("modules/iam/src/main/resources/")

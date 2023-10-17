@@ -42,7 +42,8 @@ lazy val iam = (project in file("modules/iam"))
   .configs(IntegrationTest)
   .settings(Defaults.itSettings)
   .settings(scalaVersion := scala213)
-  .settings(libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.10" % IntegrationTest)
+  .settings(libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.15" % IntegrationTest)
+  .settings(libraryDependencies += "com.dimafeng" %% "testcontainers-scala-core" % "0.40.12" % IntegrationTest)
   .dependsOn(cdktf)
 
 def welcomeMessage: Def.Setting[String] = onLoadMessage := {

@@ -1,6 +1,6 @@
 package io.github.mvillafuertem.iam
 
-import imports.aws.iam_group.IamGroup
+import io.github.mvillafuertem.aws.iam_group.IamGroup
 import software.constructs.Construct
 
 final case class Groups(scope: Construct, id: String) extends Construct(scope, id) {

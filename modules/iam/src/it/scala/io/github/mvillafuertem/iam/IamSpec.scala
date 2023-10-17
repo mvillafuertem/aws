@@ -1,11 +1,10 @@
 package io.github.mvillafuertem.iam
 
-import org.scalatest.flatspec.AnyFlatSpecLike
-import org.scalatest.matchers.should.Matchers
+import io.github.mvillafuertem.configuration.LocalStackConfigurationIT
 
-import sys.process._
+import scala.sys.process._
 
-final class IamSpec extends AnyFlatSpecLike with Matchers {
+final class IamSpec extends LocalStackConfigurationIT {
 
   it should "apply" in {
 
@@ -18,5 +17,9 @@ final class IamSpec extends AnyFlatSpecLike with Matchers {
     destroyActual shouldBe 0
 
   }
+
+  override protected def beforeAll(): Unit = dockerInfrastructure.start()
+
+  override protected def afterAll(): Unit = dockerInfrastructure.stop()
 
 }

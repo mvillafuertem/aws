@@ -3,3 +3,5 @@ src/main/resources/imports/archive
 src/main/resources/imports/aws
 src/main/resources/manifest.json
 src/main/resources/stacks
+src/main/resources/io/github/mvillafuertem/archive/
+src/main/resources/io/github/mvillafuertem/aws/

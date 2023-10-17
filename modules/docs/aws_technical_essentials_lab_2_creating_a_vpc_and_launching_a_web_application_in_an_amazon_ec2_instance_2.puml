@@ -20,7 +20,10 @@
 !define COLOR_BLUE #4E70BE
 !define WEB_SECURITY_GROUP Web Security Group
 
+
+'skinparam DefaultTextAlignment right
 skinparam linetype ortho
+'skinparam PackageTitleAlignment left
 'skinparam nodesep 10
 'skinparam ranksep 10
 'skinparam padding 5
@@ -55,12 +58,6 @@ skinparam rectangle<<e1>> {
   BorderColor red
 }
 
-!$fillerindex = 0
-!function $filler($newline="")
-!$fillerindex = $fillerindex + 1
-!return "rectangle " + %chr(34) + " " + $newline + %chr(34) + " as spacer" + $fillerindex + " <<filler>>"
-!endfunction
-
 
 AWSCloudGroup(cloud) {
   Internet(internet, "Internet",)
@@ -71,14 +68,16 @@ AWSCloudGroup(cloud) {
     AvailabilityZoneGroup(az_1, "Availability Zone A") {
 
       PublicSubnetGroup(az_1_public, "lab-2-public-subnet-1-[az-a]") {
-                rectangle "<color:#red>WEB_SECURITY_GROUP</color>\t\t\t\t\n\n\n$EC2T2InstanceIMG()\n\n\n" <<e1>> as ec2
+                rectangle a as "\t WEB_SECURITY_GROUP \t" <<e1>> {
+                 EC2T2Instance(ec2, "",) #Transparent
+               }
             }
 
     }
 
     AvailabilityZoneGroup(az_2, "Availability Zone B") {
          PublicSubnetGroup(az_2_public, "lab-2-public-subnet-2-[az-b]") {
-                $filler("\n\n\n\n\n\n\n\n\n")
+         rectangle b as "\n<color:#red>WEB_SECURITY_GROUP</color>" <<e1>>
       }
     }
 
@@ -90,18 +89,19 @@ AWSCloudGroup(cloud) {
     route_table <-[COLOR_BLUE]u-> internet_gateway
 
      ' az-a
-     az_1 -[hidden]u-> route_table
-     az_1_public -[hidden]u-> route_table
+     'az_1 -[hidden]u-> route_table
+     'az_1_public -u-> route_table
+     'a <-[hidden]u-> route_table
      ec2 <-[COLOR_BLUE]u-> route_table
 
      ' az-b
-     az_2 -[hidden]u-> route_table
-     az_2_public <-[COLOR_BLUE]u-> route_table
-     spacer1 <-[hidden]u-> route_table
+     'az_2 -[hidden]u-> route_table
+     'az_2_public <-[COLOR_BLUE]u-> route_table
+     'b <-[hidden]u-> route_table
 
-     ec2 -[hidden]r-> az_3
-     az_3 -[hidden]l-> spacer1
-     az_3 -[hidden]u-> route_table
+     'a -[hidden]r-> az_3
+     'az_3 -[hidden]l-> spacer1
+     'az_3 -[hidden]u-> route_table
 
 
   }
