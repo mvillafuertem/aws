@@ -9,9 +9,91 @@ AWS is a project with many proof of concept modules...
 
 ## Initial Configuration
 
+### S3Backend
+
+> **Note**
+>
+> if you change scala code, you need to rerun main
+> ```shell
+> 
+> sbt vpc/runMain io.github.mvillafuertem.Main2
+> 
+> ```
+
+
+1. Comment S3Backend resource which is inside Terraform.scala
+
+```scala
+//  private val _: S3Backend = S3Backend.Builder
+//    .create(self)
+//    .bucket(configuration.bucket)
+//    .key("backend/terraform.tfstate")
+//    .region("eu-west-2")
+//    .dynamodbTable(configuration.dynamodbTable)
+//    .encrypt(true)
+//    .profile("gbgdev")
+//    .build()
+```
+
+2. Create backend stack
+
 ```shell
 
+cd modules/vpc/src/main/resources/stacks/mvillafuertem-backend 
 
+terraform apply
+
+...
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+....
+
+```
+
+3. Uncomment S3Backend resource which is inside Terraform.scala
+
+```shell
+
+terraform apply
+
+│ Error: Backend initialization required: please run "terraform init"
+│ 
+│ Reason: Backend type changed from "local" to "s3"
+...
+
+```
+4. Run terraform init again
+
+```shell
+
+terraform init -migrate-state
+
+Initializing the backend...
+Terraform detected that the backend type changed from "local" to "s3".
+
+Do you want to copy existing state to the new backend?
+...
+
+Enter a value: yes
+
+```
+
+5. Check everything is ok
+
+```shell
+
+terraform plan
+
+No changes. Your infrastructure matches the configuration.
+
+```
+
+## Using AWS profile
+
+```shell
+
+terraform init -var="profile=myprofile"
+
+terraform init -backend-config="profile=myprofile"
 
 ```
 

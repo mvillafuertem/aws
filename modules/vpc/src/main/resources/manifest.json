@@ -1,0 +1,21 @@
+{
+  "version": "0.19.0",
+  "stacks": {
+    "mvillafuertem-backend": {
+      "name": "mvillafuertem-backend",
+      "constructPath": "mvillafuertem-backend",
+      "workingDirectory": "stacks/mvillafuertem-backend",
+      "synthesizedStackPath": "stacks/mvillafuertem-backend/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "mvillafuertem-dev": {
+      "name": "mvillafuertem-dev",
+      "constructPath": "mvillafuertem-dev",
+      "workingDirectory": "stacks/mvillafuertem-dev",
+      "synthesizedStackPath": "stacks/mvillafuertem-dev/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    }
+  }
+}

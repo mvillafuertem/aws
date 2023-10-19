@@ -46,6 +46,14 @@ lazy val iam = (project in file("modules/iam"))
   .settings(libraryDependencies += "com.dimafeng" %% "testcontainers-scala-core" % "0.40.12" % IntegrationTest)
   .dependsOn(cdktf)
 
+lazy val vpc = (project in file("modules/vpc"))
+  .configs(IntegrationTest)
+  .settings(Defaults.itSettings)
+  .settings(scalaVersion := scala213)
+  .settings(libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.15" % Test)
+  .settings(libraryDependencies += "com.dimafeng" %% "testcontainers-scala-core" % "0.40.12" % IntegrationTest)
+  .dependsOn(cdktf)
+
 def welcomeMessage: Def.Setting[String] = onLoadMessage := {
   def header(text: String): String                = s"${csl.BOLD}${csl.MAGENTA}$text${csl.RESET}"
   def cmd(text: String, description: String = "") = f"${csl.GREEN}> ${csl.CYAN}$text%10s $description${csl.RESET}"

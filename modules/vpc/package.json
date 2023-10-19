@@ -1,0 +1,19 @@
+{
+  "name": "iam",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "scripts": {
+    "initial": "cd ./src/main/resources/stacks/asdfadjkfaskdf && terraform init",
+    "applyInitial": "cd ./src/main/resources/stacks/mvillafuertem-cdktf-state && terraform apply",
+    "applyInitial": "cd ./src/main/resources/stacks/mvillafuertem-cdktf-state && terraform apply",
+    "destroyInitial": "cd ./src/main/resources/stacks/mvillafuertem-cdktf-state && terraform destroy",
+    "outputInitial": "cd ./src/main/resources/stacks/mvillafuertem-cdktf-state && terraform output -json",
+    "applyVpc": "cd ./src/main/resources/stacks/mvillafuertem-cdktf-vpc && terraform apply",
+    "destroyVpc": "cd ./src/main/resources/stacks/mvillafuertem-cdktf-vpc && terraform destroy",
+    "planVpc": "cd ./src/main/resources/stacks/mvillafuertem-cdktf-vpc && terraform init -migrate-state && terraform plan"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "private": true
+}
