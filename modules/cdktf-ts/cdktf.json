@@ -1,7 +1,7 @@
 {
-  "language": "java",
-  "app": "sbt cdktf/run",
-  "projectId": "85dcf7c0-1710-4147-b236-8643847ab5e6",
+  "language": "typescript",
+  "app": "npx ts-node main.ts",
+  "projectId": "32f74b79-6068-434f-98dc-d8da00b4cbec",
   "sendCrashReports": "true",
   "codeMakerOutput": "io.github.mvillafuertem",
   "terraformProviders": [
