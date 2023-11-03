@@ -1,6 +1,6 @@
 import {Construct} from "constructs";
 import {App, TerraformStack} from "cdktf";
-import {AwsProvider} from "./io.github.mvillafuertem/providers/aws/provider";
+import {AwsProvider} from "../../io.github.mvillafuertem/providers/aws/provider";
 
 class MyStack extends TerraformStack {
     constructor(scope: Construct, id: string) {

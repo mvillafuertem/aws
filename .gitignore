@@ -1,1 +1,13 @@
 /modules/vpc/src/main/resources/stacks/
+*.d.ts
+*.js
+node_modules
+cdktf.out
+cdktf.log
+*terraform.*.tfstate*
+.gen
+.terraform
+tsconfig.tsbuildinfo
+!jest.config.js
+!setup.js
+libs/cdktf-ts/io.github.mvillafuertem
