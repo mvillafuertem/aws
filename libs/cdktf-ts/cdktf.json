@@ -1,6 +1,6 @@
 {
   "language": "typescript",
-  "app": "npx ts-node main.ts",
+  "app": "npx ts-node src/lib/main.ts",
   "projectId": "32f74b79-6068-434f-98dc-d8da00b4cbec",
   "sendCrashReports": "true",
   "codeMakerOutput": "io.github.mvillafuertem",

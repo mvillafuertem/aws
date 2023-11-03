@@ -15,7 +15,8 @@ class MyStack extends TerraformStack {
 
     }
 }
-
+// yarn --cwd libs/cdktf-ts/ install
+// yarn --cwd libs/cdktf-ts/ synth
 const app: App = new App({outdir: "io.github.mvillafuertem"});
 new MyStack(app, "cdktf-ts");
 app.synth();
