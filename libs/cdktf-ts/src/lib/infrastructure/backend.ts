@@ -14,11 +14,13 @@ interface BackendConfiguration {
 }
 
 export class BackendStack extends Construct {
-    constructor(scope: Construct, id: string, private readonly backendConfiguration: BackendConfiguration) {
+    constructor(scope: Construct, id: string, backendConfiguration: BackendConfiguration) {
         super(scope, id);
 
+        const {bucket, dynamodbTable} = backendConfiguration;
+
         const s3Bucket: S3Bucket = new S3Bucket(this, "s3", {
-            bucket: this.backendConfiguration.bucket,
+            bucket: bucket,
             forceDestroy: true,
             tags: {
                 owner: "cdktf",
@@ -42,7 +44,7 @@ export class BackendStack extends Construct {
         })
 
         new DynamodbTable(this, "dynamodb", {
-            name: this.backendConfiguration.dynamodbTable,
+            name: dynamodbTable,
             billingMode: "PAY_PER_REQUEST",
             hashKey: "LockID",
             attribute: [{name: "LockID", type: "S"}],
